@@ -11,7 +11,17 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'title',
+        'cover_image',
+        'body',
+        'slug',
+        'meta_description',
+        'category_id',
+        'author_id',
+        'published_at',
+        'featured',
+    ];
 
 
     public function category(): BelongsTo
@@ -26,6 +36,7 @@ class Post extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        // ->withDefault('Admin User');
+        return $this->belongsTo(User::class, 'author_id')->withDefault('Admin User');;
     }
 }

@@ -10,7 +10,12 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'parent_id',
+        // 'slug'
+        'slug'
+    ];
 
 
     public function posts(): HasMany
