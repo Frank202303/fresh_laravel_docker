@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -44,28 +45,28 @@ class CategoryController extends Controller
         return redirect()->route('categories.index')->with('success', 'Category created.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Category $category)
     {
-        return view('dashboard.categories.edit');
+        return view('dashboard.categories.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        // return $request;  For TEST
+        $category->name = $request->name;
+        $category->slug = Str::slug($request->name);
+
+        $category->save();
+
+        return redirect()->route('categories.index')->with('success', 'Category updated.');
     }
 
     /**

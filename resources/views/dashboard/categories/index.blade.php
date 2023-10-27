@@ -46,18 +46,17 @@
                                 <td class="px-2 py-4 whitespace-nowrap">{{ $category->id }}</td>
                                 <td class="px-2 py-4 whitespace-nowrap">{{ $category->name }}</td>
                                 <td class="px-2 py-4 whitespace-nowrap">
-                                    <ul>[
-                                        @foreach ($category->subCategories as $subCategory)
+                                    <ul>[@foreach ($category->subCategories as $subCategory)
                                             <li>{{ $subCategory->name }}, </li>
-                                        @endforeach
-                                        ]
+                                        @endforeach]
                                     </ul>
                                 </td>
                                 <td class="px-2 py-4 whitespace-nowrap">{{ $category->created_at }}</td>
                                 <td class="px-2 py-4 whitespace-nowrap">{{ $category->updated_at }}</td>
                                 <td class="px-2 py-4 whitespace-nowrap">
                                     <div class="flex space-x-2">
-                                        <a href="">
+                                        {{-- use route('categories.edit' :   open the EDIT PAGE --}}
+                                        <a href="{{ route('categories.edit', $category) }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
