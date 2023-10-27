@@ -9,12 +9,14 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('dashboard.categories.index');
+        $categories = $this->getParentCategories();
+        return view('dashboard.categories.index', compact('categories'));
     }
 
     /**
@@ -22,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::with('subcategories')->whereNull('parent_id')->get();
+        $categories =  $this->getParentCategories();
         return view('dashboard.categories.create', compact('categories'));
     }
 
@@ -72,5 +74,9 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+    }
+    public function getParentCategories()
+    {
+        return Category::with('subcategories')->whereNull('parent_id')->get();
     }
 }
